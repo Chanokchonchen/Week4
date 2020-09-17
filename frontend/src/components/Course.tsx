@@ -1,7 +1,16 @@
 import React from "react"
 import {Props } from "./type"
+import {A} from 'hookrouter'
 function Course(props : Props) {
-    return <li>{props.number} {props.title}</li>
+    return (
+        <div>
+            <li>
+                <A href={`/review/${props.id}`}>{props.number} {props.title}</A>   
+            </li>
+        </div>
+    )
+
 }
+
 
 export default Course;

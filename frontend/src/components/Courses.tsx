@@ -8,13 +8,9 @@ function Courses() {
     function getCourses() {
         axios.get(`http://localhost:3000/courses/`)
       .then(res => {
+        console.log(res.data);
         setCourses(res.data);
       })
-    }
-    function getFormCourse(course : course) {
-        setCourses((prev : course[]) => {
-            return [...prev , course]
-        })
     }
     useEffect(()=>{
         getCourses();
@@ -28,7 +24,7 @@ function Courses() {
                 return <Course  key={index} {...course} />
             }  )}
             </ul>
-            <CourseForm getFormCourse={getFormCourse}/>
+            <CourseForm getCourse={getCourses}/>
 
         </div>
     )

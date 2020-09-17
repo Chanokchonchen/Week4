@@ -1,10 +1,7 @@
-import React from "react"
-import Courses from "../components/Courses"
+import {useRoutes } from "hookrouter"
+import Routes from "./Routes"
 function App() {
-    return (
-        <div>
-            <Courses />
-        </div>
-    )
+    const routeResult = useRoutes(Routes)
+    return routeResult
 }
 export default App;

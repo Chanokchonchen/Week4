@@ -1,7 +1,7 @@
-import { CpuInfo } from "os";
 import React, { useState } from "react";
 import {course} from "./type"
 import {PropsCourseFrom } from "./type"
+import axios from "axios"
 function CourseForm(props : PropsCourseFrom) {
     const emptyContent : course = {number : "" , title : ""}
     const [content,setContent] = useState<course>(emptyContent)
@@ -15,17 +15,19 @@ function CourseForm(props : PropsCourseFrom) {
     function handleSubmitForm(event : React.ChangeEvent<HTMLFormElement>) {
         event.preventDefault();
     }
+    async function postAndReload(course : course) {
+        const res = await axios.post('http://localhost:3000/courses/', course)
+        setContent(emptyContent);
+        console.log(res)
+        props.getCourse();
+    }
     return (
         <div>
-            <form onSubmit={handleSubmitForm}>
+            <form onSubmit={handleSubmitForm} >
                 Number : <input onChange={handleChange} type="text"  value={content.number} name="number" /><br />
                 Title : <input onChange={handleChange} type="text"  value={content.title} name="title" /><br />
                 <button onClick={()=> {
-                    console.log("Submit")
-                    console.log(content)
-                    props.getFormCourse(content)
-                    setContent(emptyContent)
-                    
+                    postAndReload(content);
                 }}>Submit</button>
             </form>
         </div>
